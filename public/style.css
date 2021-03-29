@@ -85,6 +85,7 @@ footer {
   width: 275px;
   padding: 20px;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+  margin: 10px;
 }
 
 .venueimage {
@@ -121,12 +122,14 @@ footer {
   letter-spacing: 3.4px;
   text-align: left;
   color: #4a4a4a;
+  padding: 10px;
 }
 
 #venues {
   display: flex;
   justify-content: space-around;
   min-height: 250px;
+  
 }
 
 #weather {

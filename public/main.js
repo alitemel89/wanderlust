@@ -1,14 +1,12 @@
 // Foursquare API Info
-const clientId = 'HH0ZHWTSNNJUL1ARHROOL4OMUOKHORX5IRYPB0EYEWPWZVZP';
-const clientSecret = '2RVJSLY0NLOFTT21YOWH23ZRX5OXL3KL4LOPHE5O5353UAF3';
+
 const url = 'https://api.foursquare.com/v2/venues/explore?near=';
 
 // OpenWeather Info
-const openWeatherKey = 'f0b94bb520ebde7febf8a54dfcb3bbee';
 const weatherUrl = 'https://api.openweathermap.org/data/2.5/weather';
 
 // Page Elements
-const $input = $('#city');
+const $input = $("#city");
 const $submit = $('#button');
 const $destination = $('#destination');
 const $container = $('.container');
@@ -19,7 +17,7 @@ const weekDays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Frida
 // Add AJAX functions here:
 const getVenues = async () => {
   const city = $input.val()
-  const urlToFetch = `${url}${city}&limit=10&client_id=${clientId}&client_secret=${clientSecret}&v=20180101`;
+  const urlToFetch = `${url}${city}&limit=10&client_id=${config.clientId}&client_secret=${config.clientSecret}&v=20180101`;
 
   try {
     const response = await fetch(urlToFetch); 
@@ -29,6 +27,7 @@ const getVenues = async () => {
       const venues = jsonResponse.response.groups[0].items.map(element => element.venue)
       console.log(venues)
       return venues
+
     }
 
   }
@@ -41,7 +40,7 @@ const getVenues = async () => {
 
 const getForecast = async () => {
     try {
-       const urlToFetch = `${weatherUrl}?&q=${$input.val()}&APPID=${openWeatherKey}`
+       const urlToFetch = `${weatherUrl}?&q=${$input.val()}&APPID=${config.openWeatherKey}`
        const response = await fetch(urlToFetch)
        if (response.ok) {
          const jsonResponse = await response.json()
@@ -64,9 +63,10 @@ const renderVenues = (venues) => {
     const venueIcon = venue.categories[0].icon
     const venueImgSrc = `${venueIcon.prefix}bg_64${venueIcon.suffix}`
     let venueContent = createVenueHTML(venue.name, venue.location, venueImgSrc);
-$venue.append(venueContent);
     $venue.append(venueContent);
+    
   });
+
   $destination.append(`<h2>${venues[0].location.city}</h2>`);
 }
 
